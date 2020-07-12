@@ -1,0 +1,34 @@
+Warning: v.x_x1.vm: has no value, DC 0 assumed
+
+Circuit: * spicenetlist
+
+Warning: Model issue on line 35 : .model 2n2222a npn(is=1e-14 vaf=100 bf=200 ikf=0.3 xtb=1 ...
+  unrecognized parameter (vceo) - ignored
+Doing analysis at TEMP = 0.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+coila                                        0
+n_4                                          0
+x_x1.5                                       0
+n_7                                          0
+coilb                                        0
+x_x1.6                                       0
+te                                           0
+n_2                                          0
+vout                                         0
+vin                                          0
+v.x_x1.vm#branch                             0
+e.x_x1.e#branch                              0
+v_v1#branch                                  0
+
+ASCII raw file
+doAnalyses: TRAN:  Timestep too small; time = 0.124399, timestep = 4.75e-016: trouble with node "v.x_x1.vm#branch"
+
+
+tran simulation(s) aborted
+Note: No ".plot", ".print", or ".fourier" lines; no simulations run

@@ -1,0 +1,83 @@
+* SpiceNetList
+* 
+* Exported from simulacion.sch at 7/9/2020 5:17 PM
+* 
+* EAGLE Version 9.6.2 Copyright (c) 1988-2020 Autodesk, Inc.
+* 
+.TEMP=25.0
+
+* --------- .OPTIONS ---------
+.OPTIONS ABSTOL=1e-12 GMIN=1e-12 PIVREL=1e-3 ITL1=100 ITL2=50 PIVTOL=1e-13 RELTOL=1e-3 VNTOL=1e-6 RSHUNT=10e9 CHGTOL=1e-15 ITL4=10 METHOD=TRAP SRCSTEPS=0 TRTOL=7 NODE
+
+* --------- .PARAMS ---------
+.PARAM RATIO=1
+* --------- devices ---------
+Q_Q2 COILA N_4 0 2N2222A 
+X_X1 COILA COILB TE N_7 XFORMER 
+Q_Q1 COILB N_2 0 2N2222A 
+D_D4 N_7 VOUT DMOD 
+C_C2 COILB N_4 0.47u IC=1V 
+C_C3 VOUT 0 0.47u IC=1V 
+D_D1 TE VOUT DMOD 
+D_D2 0 TE DMOD 
+R_R3 N_2 VIN 27k 
+R_R6 N_4 VIN 27k 
+R_R2 COILB VIN 1k 
+V_V1 VIN 0 5v 
+D_D3 0 N_7 DMOD 
+R_R1 COILA VIN 1k 
+C_C1 COILA N_2 0.47u IC=1V 
+
+* --------- models ---------
+
+* model file: C:/Users/joser/OneDrive/SieteSegmentos-Articulos/Articulos-Pepe/reto-Wurth/simulacion/2N2222A.mdl
+* from https://www.eevblog.com
+.model 2N2222A NPN(IS=1E-14 VAF=100 BF=200 IKF=0.3 XTB=1.5 BR=3 CJC=8E-12 CJE=25E-12 TR=100E-9 TF=400E-12 ITF=1 VTF=2 XTF=3 RB=10 RC=.3 RE=.2 Vceo=30)
+
+
+* (model found in library)
+
+**********************
+* Autodesk EAGLE - Spice Model File
+* Date: 9/17/17
+* basic diode intrinsic model
+**********************
+.MODEL DMOD D
+
+
+* (model found in library)
+
+**********************
+* Autodesk EAGLE - Spice Model File
+* transformer subcircuit, requires RATIO parameter defined
+* Date: 10/1/17
+**********************
+.SUBCKT XFORMER 1 2 3 4
+E 5 4 1 2 {RATIO}
+F 1 2 VM {RATIO}
+VM 5 6
+RP 1 2 1MEG
+RS 6 3 1U
+.ENDS XFORMER
+
+
+* --------- simulation ---------
+
+
+.control
+set filetype=ascii
+TRAN 0.00038 0.2 0.01 0.00038  UIC 
+write simulacion.sch.sim V(VIN) V(COILB) V(COILA) V(VOUT) V(TE) I(V_V1)
+.endc
+
+.END
+
+
+
+
+
+
+
+
+
+
